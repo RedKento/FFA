@@ -14,6 +14,7 @@ namespace FFA.Services
     public sealed class RulesService : Service
     {
         private readonly SendingService _sender;
+        // TODO: no semaphore, will not work when bot is public...
         private readonly SemaphoreSlim _semaphore;
         private readonly IMongoCollection<Guild> _dbGuilds;
         private readonly IMongoCollection<Rule> _dbRules;
