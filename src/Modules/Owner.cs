@@ -114,5 +114,15 @@ namespace FFA.Modules
             await Context.ReplyAsync($"You have successfully removed this rule.");
             await _rulesService.UpdateAsync(Context.Guild);
         }
+
+        [Command("AddIgnoreChannel")]
+        [Alias("ignorechannel")]
+        [Summary("Adds a channel for the bot to not give rep in.")]
+        public async Task AddIgnoreChannelAsync(
+            [Summary("channel")] ITextChannel channel)
+        {
+            await _dbGuilds.UpsertGuildAsync(Context.Guild.Id, x => x.IgnoredChannelIds.Add(channel.Id));
+            await Context.ReplyAsync($"You have successfully chose bot to not give rep in channel {channel.Name}.");
+        }
     }
 }

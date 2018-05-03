@@ -22,10 +22,12 @@ namespace FFA.Services
 
         public Task ApplyAsync(Context ctx)
         {
-            if (ctx.Guild == null)
+            if (ctx.Guild == null ||
+                ctx.GuildUser.RoleIds.Any(x => x == ctx.DbGuild.MutedRoleId) ||
+                ctx.DbGuild.IgnoredChannelIds.Contains(ctx.Channel.Id))
+            {
                 return Task.CompletedTask;
-            else if (ctx.GuildUser.RoleIds.Any(x => x == ctx.DbGuild.MutedRoleId))
-                return Task.CompletedTask;
+            }
 
             if (!_cooldowns.TryGetValue(ctx.User.Id, out DateTimeOffset endsAt))
             {

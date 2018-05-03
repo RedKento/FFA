@@ -69,7 +69,6 @@ namespace FFA.Modules
                 Context.ReplyErrorAsync("There have been no recent deleted messages in this channel.");
         }
 
-
         [Command("TimeLeft")]
         [Alias("left")]
         [Summary("Tell how much time is left on your mute.")]

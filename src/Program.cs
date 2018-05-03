@@ -9,12 +9,12 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-// TODO: disallow certain channels from getting chat rep
 // TODO: README, contributing, all other github things.
 // TODO: move all command checks to preconditions!
 namespace FFA

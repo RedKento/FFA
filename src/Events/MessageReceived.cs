@@ -6,6 +6,7 @@ using FFA.Extensions.Discord;
 using FFA.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FFA.Events
@@ -43,10 +44,9 @@ namespace FFA.Events
 
                 var ctx = new Context(_client, msg, _provider);
 
-                if (ctx.TextChannel != null && !await ctx.TextChannel.CanSendAsync())
-                    return;
-
                 await ctx.InitializeAsync();
+
+                Console.WriteLine(ctx.DbGuild.IgnoredChannelIds + " this it");
 
                 var isRateLimited = _rateLimitService.IsIgnored(ctx.User.Id);
                 var isSpammer = ctx.Guild != null && ctx.DbGuild.AutoMute && !await _spamService.AuthenticateAsync(ctx);

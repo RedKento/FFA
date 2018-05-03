@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace FFA.Database.Models
 {
     public sealed class Guild : Entity
@@ -6,6 +8,7 @@ namespace FFA.Database.Models
         public ulong? LogChannelId { get; set; }
         public ulong? RulesChannelId { get; set; }
         public ulong? ArchiveChannelId { get; set; }
+        public List<ulong> IgnoredChannelIds { get; set; }
         public uint CaseCount { get; set; }
         public uint MaxActions { get; set; }
         public bool AutoMute { get; set; }
