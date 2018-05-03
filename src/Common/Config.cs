@@ -38,7 +38,7 @@ namespace FFA.Common
         public const int MEMBER_AGE = 2;
 
         // Chat settings
-        public static readonly TimeSpan CHAT_SERVICE_DELAY = TimeSpan.FromSeconds(1);
+        public static readonly TimeSpan CHAT_SERVICE_DELAY = TimeSpan.FromSeconds(30);
         public const double CHAT_REWARD = 0.025;
 
         // Reputation decay settings
