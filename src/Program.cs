@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 // TODO: README, contributing, all other github things.
 // TODO: move all command checks to preconditions!
+// TODO: patch duplicate cooldown cmd bug
 namespace FFA
 {
     public sealed class Program
