@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 // TODO: patch duplicate cooldown cmd bug
 // TODO: ability to disable any module/command
 // TODO: make all services static, entirely pointless to be classes
+// TODO: require a rule when deleting a command, and log the action
 namespace FFA
 {
     public sealed class Program
