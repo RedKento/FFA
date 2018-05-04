@@ -19,6 +19,7 @@ namespace FFA.Preconditions.Command
         {
             var context = ctx as Context;
 
+            // TODO: fetch member if it doesnt have JoinedAt
             if (!context.GuildUser.JoinedAt.HasValue ||
                 context.GuildUser.JoinedAt.Value.Add(_timeSpan).CompareTo(DateTimeOffset.UtcNow) > 0)
             {

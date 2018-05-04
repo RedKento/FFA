@@ -17,16 +17,15 @@ using System.Threading.Tasks;
 // TODO: move all command checks to preconditions!
 // TODO: patch duplicate cooldown cmd bug
 // TODO: ability to disable any module/command
-// TODO: make all services static, entirely pointless to be classes
 // TODO: require a rule when deleting a command, and log the action
 namespace FFA
 {
     public sealed class Program
     {
         private static void Main(string[] args)
-            => new Program().StartAsync(args).GetAwaiter().GetResult();
+            => StartAsync(args).GetAwaiter().GetResult();
 
-        private async Task StartAsync(string[] args)
+        private static async Task StartAsync(string[] args)
         {
             var parsedArgs = await Arguments.ParseAsync(args);
             var credsFileName = parsedArgs["credentials"];
