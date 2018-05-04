@@ -18,7 +18,7 @@ namespace FFA.Services
         }
 
         public bool Authenticate(Context ctx)
-            => !actions.TryGetValue(ctx.User.Id, out uint val) || val <= ctx.DbGuild.MaxActions;
+            => !actions.TryGetValue(ctx.User.Id, out var val) || val <= ctx.DbGuild.MaxActions;
 
         public void Reset()
             => actions.Clear();

@@ -16,7 +16,7 @@ namespace FFA.Services
 
         public bool IsIgnored(ulong userId)
         {
-            if (!_ignoredUsers.TryGetValue(userId, out DateTimeOffset endsAt))
+            if (!_ignoredUsers.TryGetValue(userId, out var endsAt))
                 return false;
 
             if (endsAt.CompareTo(DateTimeOffset.UtcNow) < 0)

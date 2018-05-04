@@ -19,7 +19,7 @@ namespace FFA.Readers
         {
             var restClient = services.GetRequiredService<DiscordRestClient>();
 
-            if (MentionUtils.TryParseUser(input, out ulong id) ||
+            if (MentionUtils.TryParseUser(input, out var id) ||
                 ulong.TryParse(input, NumberStyles.None, CultureInfo.InvariantCulture, out id))
             {
                 var user = await context.Client.GetUserAsync(id);
@@ -41,7 +41,7 @@ namespace FFA.Readers
                 {
                     var username = input.Substring(0, index);
 
-                    if (ushort.TryParse(input.Substring(index + 1), out ushort discriminator))
+                    if (ushort.TryParse(input.Substring(index + 1), out var discriminator))
                     {
                         var guildUser = guildUsers.FirstOrDefault(x => x.DiscriminatorValue == discriminator &&
                             string.Equals(username, x.Username, StringComparison.OrdinalIgnoreCase));

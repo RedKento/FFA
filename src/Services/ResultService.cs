@@ -37,8 +37,7 @@ namespace FFA.Services
                 var cmd = _commands.GetCommand(ctx, argPos);
 
                 _actionService.Increment(ctx, cmd);
-
-                // TODO: always apply the cooldown regardless of success BEFORE EXECUTING, then remove it if the command failed.
+                
                 return _cooldownService.ApplyCooldownAsync(ctx, cmd);
             }
 
@@ -65,7 +64,7 @@ namespace FFA.Services
             return ctx.ReplyErrorAsync(message);
         }
 
-        public Task HandleExceptionAsync(Context ctx, Exception ex)
+        public async Task HandleExceptionAsync(Context ctx, Exception ex)
         {
             var last = ex.Last();
             var message = last.Message;
@@ -75,8 +74,11 @@ namespace FFA.Services
                 if ((int)httpEx.HttpCode == Constants.TOO_MANY_REQUESTS)
                 {
                     _rateLimitService.IgnoreUser(ctx.User.Id, Config.IGNORE_DURATION);
-                    return ctx.DmAsync($"You will not be able to use commands for the next " +
+
+                    await ctx.DmAsync($"You will not be able to use commands for the next " +
                         $"{Config.IGNORE_DURATION.TotalMinutes} minutes. Please do not participate in command spam.");
+
+                    return;
                 }
                 else if (!Config.DISCORD_CODES.TryGetValue(httpEx.DiscordCode.GetValueOrDefault(), out message) &&
                          !Config.HTTP_CODES.TryGetValue(httpEx.HttpCode, out message))
@@ -84,10 +86,12 @@ namespace FFA.Services
                     message = last.Message;
                 }
             }
+            else
+            {
+                await _logger.LogAsync(LogSeverity.Error, $"{ex}");
+            }
 
-            return Task.WhenAll(
-                _logger.LogAsync(LogSeverity.Error, $"{ex}"),
-                ctx.ReplyErrorAsync(message));
+            await ctx.ReplyErrorAsync(message);
         }
     }
 }

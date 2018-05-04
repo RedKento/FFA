@@ -66,12 +66,12 @@ namespace FFA.Modules
         {
             var script = CSharpScript.Create(code, Config.SCRIPT_OPTIONS, typeof(Globals));
 
-            if (!_evalService.TryCompile(script, out string errorMessage))
+            if (!_evalService.TryCompile(script, out var err))
             {
                 await Context.SendFieldsErrorAsync(new string[]
                 {
                     "Eval", $"```cs\n{code}```",
-                    "Compilation Error", $"```{errorMessage}```"
+                    "Compilation Error", $"```{err}```"
                 });
             }
             else

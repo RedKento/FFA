@@ -17,7 +17,7 @@ namespace FFA.Readers
         {
             // TODO: move to rules service
             // TODO: support more than 9 categories, shouldnt only be 2 chars!
-            if (input.Length != 2 || !ushort.TryParse(input[0].ToString(), out ushort categoryNumber))
+            if (input.Length != 2 || !ushort.TryParse(input[0].ToString(), out var categoryNumber))
                 return TypeReaderResult.FromError(CommandError.Unsuccessful, "You have provided an invalid rule format.");
 
             var dbRules = services.GetRequiredService<IMongoCollection<Rule>>();

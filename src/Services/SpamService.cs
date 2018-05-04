@@ -29,7 +29,7 @@ namespace FFA.Services
 
         public async Task<bool> AuthenticateAsync(Context context)
         {
-            if (!_spamEntries.TryGetValue(context.User.Id, out SpamEntry entry))
+            if (!_spamEntries.TryGetValue(context.User.Id, out var entry))
             {
                 _spamEntries.TryAdd(context.User.Id, new SpamEntry(context.Message));
                 return true;

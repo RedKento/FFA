@@ -16,7 +16,7 @@ namespace FFA.Readers
             IServiceProvider services)
         {
             if (uint.TryParse(input.Replace("#", string.Empty), NumberStyles.HexNumber, _numberFormat,
-                out uint result) && result <= 0xFFFFFF)
+                out var result) && result <= 0xFFFFFF)
             {
                 return Task.FromResult(TypeReaderResult.FromSuccess(new Color(result)));
             }
