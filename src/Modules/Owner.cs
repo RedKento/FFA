@@ -122,7 +122,7 @@ namespace FFA.Modules
             [Summary("channel")] ITextChannel channel)
         {
             await _dbGuilds.UpsertGuildAsync(Context.Guild.Id, x => x.IgnoredChannelIds.Add(channel.Id));
-            await Context.ReplyAsync($"You have successfully ignored the channel {channel}.");
+            await Context.ReplyAsync($"You have successfully ignored {channel.Mention}.");
         }
     }
 }
