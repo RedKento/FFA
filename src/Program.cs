@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 // TODO: README, contributing, all other github things.
 // TODO: move all command checks to preconditions!
 // TODO: patch duplicate cooldown cmd bug
+// TODO: ability to disable any module/command
+// TODO: make all services static, entirely pointless to be classes
 namespace FFA
 {
     public sealed class Program
