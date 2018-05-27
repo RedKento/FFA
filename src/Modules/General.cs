@@ -50,34 +50,6 @@ namespace FFA.Modules
             await Context.ReplyAsync("You have successfully set your role color.");
         }
 
-        [Command("AddEmote")]
-        [Alias("addemoji", "createemote", "createemoji")]
-        [Summary("Add an emote.")]
-        [AttachedImage]
-        [Cooldown(Config.ADD_EMOTE_CD)]
-        [Top(Config.TOP_ADD_EMOTE)]
-        [AvailableEmoteSlots]
-        public async Task AddEmoteAsync(
-            [Summary("nice")] string name)
-        {
-            var attachment = Context.Message.Attachments.First();
-            var stream = new MemoryStream(new WebClient().DownloadData(new Uri(attachment.Url)));
-            await Context.Guild.CreateEmoteAsync(name, new Image(stream));
-            await Context.ReplyAsync("You have successfully added a new emote.");
-        }
-
-        [Command("RemoveEmote")]
-        [Alias("removeemoji", "deleteemote", "deleteemoji")]
-        [Summary("Remove an emote.")]
-        [Top(Config.TOP_REMOVE_EMOTE)]
-        [Cooldown(Config.REMOVE_EMOTE_CD)]
-        public async Task RemoveEmoteAsync(
-            [Summary(":nice:")] GuildEmote emote)
-        {
-            await Context.Guild.DeleteEmoteAsync(emote);
-            await Context.ReplyAsync("You have successfully removed this emote.");
-        }
-
         [Command("AddCommand")]
         [Alias("addcmd", "createcommand", "createcmd")]
         [Summary("Add any custom command you please.")]
